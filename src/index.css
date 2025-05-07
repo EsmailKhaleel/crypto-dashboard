@@ -1,0 +1,420 @@
+/* General Styles */
+:root {
+    --primary-bg: #13111C;
+    --secondary-bg: #1A1825;
+    --accent-primary: #6C5DD3;
+    --accent-secondary: #8E7FF0;
+    --text-primary: #ffffff;
+    --text-secondary: #A5A5A5;
+    --success-color: #58BD7D;
+    --error-color: #FF4D4D;
+    --card-bg: #1E1B2E;
+    --gradient-start: #6C5DD3;
+    --gradient-end: #8E7FF0;
+}
+
+/* Theme Variables */
+:root[data-theme="dark"] {
+    --primary-bg: #13111C;
+    --secondary-bg: #1A1825;
+    --accent-primary: #6C5DD3;
+    --accent-secondary: #8E7FF0;
+    --text-primary: #ffffff;
+    --text-secondary: #A5A5A5;
+    --success-color: #58BD7D;
+    --error-color: #FF4D4D;
+    --card-bg: #1E1B2E;
+    --gradient-start: #6C5DD3;
+    --gradient-end: #8E7FF0;
+    --header-bg: #1A1825;
+}
+
+:root[data-theme="light"] {
+    --primary-bg: #F8F9FA;
+    --secondary-bg: #FFFFFF;
+    --accent-primary: #6C5DD3;
+    --accent-secondary: #8E7FF0;
+    --text-primary: #1A1825;
+    --text-secondary: #6B7280;
+    --success-color: #58BD7D;
+    --error-color: #FF4D4D;
+    --card-bg: #FFFFFF;
+    --gradient-start: #6C5DD3;
+    --gradient-end: #8E7FF0;
+    --header-bg: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Loading Text */
+p {
+    text-align: center;
+    color: #fff;
+    font-size: 1rem; /* Smaller font size */
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Selected Pair and Price */
+h5 {
+    text-align: center;
+    color: #777;
+    margin-bottom: 15px; /* Reduced margin */
+    font-size: 1.1rem; /* Smaller font size */
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Selected Pair and Price */
+h3 {
+    text-align: center;
+    color: #f5a623;
+    font-size: 1.3rem; /* Reduced font size */
+    margin-bottom: 15px; /* Reduced margin */
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Dashboard Container */
+.dashboard {
+    padding: 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Chart Container */
+.chart-container {
+    background-color: var(--secondary-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(108, 93, 211, 0.12);
+}
+
+.chart-wrapper {
+    height: 400px;
+    width: 100%;
+}
+
+/* Currency Pair Cards */
+.currency-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--secondary-bg);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Title */
+.dashboard h2 {
+    color: var(--accent-primary);
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Currency Pair Dropdown */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0 auto;
+  }
+  
+  .custom-dropdown-toggle {
+    padding: 10px 14px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .custom-dropdown-menu {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white   ;
+    border: 1px solid #444;
+    border-radius: 6px;
+    z-index: 999;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown-group {
+    margin: 5px 0;
+  }
+  
+  .group-label {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #0d0b17;
+    background-color: rgb(170, 170, 175);
+  }
+  
+  .dropdown-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #000;
+  }
+  
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .dropdown-item.selected {
+    background-color: rgba(108, 93, 211, 0.2);
+  }
+  
+  .arrow {
+    font-size: 0.8rem;
+  }
+  
+
+.online {
+    color: var(--success-color);
+}
+
+.current-price {
+    color: var(--accent-primary);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Currency Card */
+.currency-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.currency-card:hover {
+    box-shadow: 0 12px 48px rgba(108, 93, 211, 0.12);
+    border-color: var(--accent-primary);
+}
+
+.currency-card h3 {
+    color: #f5a623;
+    font-size: 1.1rem; 
+    margin-bottom: 8px;
+}
+
+/* Button */
+.details-button {
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-button:hover {
+    box-shadow: 0 4px 24px rgba(108, 93, 211, 0.25);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Tooltip Styling */
+.chartjs-tooltip {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    border-radius: 6px !important; /* Reduced border radius */
+    padding: 8px !important; /* Reduced padding */
+    color: #fff !important;
+    font-size: 12px !important; /* Reduced font size */
+    border: 1px solid #444 !important;
+}
+.chartjs-render-monitor {
+    filter: brightness(0.1) saturate(2) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 1rem;
+    }
+
+    .chart-wrapper {
+        height: 300px;
+    }
+
+    .currency-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard h2 {
+        font-size: 2rem;
+    }
+
+    .current-price {
+        font-size: 1.2rem; /* Reduced font size */
+    }
+}
+
+/* Custom Scrollbar */
+/* ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-secondary);
+} */
+
+.green {
+    color: var(--success-color);
+}
+
+.red {
+    color: var(--error-color);
+}
+
+/* App Container */
+.app-container {
+    min-height: 100vh;
+    background-color: var(--primary-bg);
+}
+
+/* Tab Navigation */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tab-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--card-bg);
+    border: 1px solid gray;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button.active {
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border: none;
+}
+
+.tab-content {
+    padding: 1rem;
+}
+
+/* App Header */
+.app-header {
+    background-color: var(--header-bg);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(58, 58, 58, 0.364);
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+.header-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid rgba(128, 128, 128, 0.278);
+    border-radius: 12px;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.theme-toggle:hover {
+    box-shadow: 0 4px 24px rgba(108, 93, 211, 0.25);
+}
