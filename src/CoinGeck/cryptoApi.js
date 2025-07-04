@@ -2,11 +2,11 @@ import axios from "axios";
 
 const API_URL = "https://api.coingecko.com/api/v3";
 
-export const fetchCryptos = async (per_page, page) => {
+export const fetchCryptos = async (per_page, page, vs_currency = "usd") => {
     try {
         const response = await axios.get(`${API_URL}/coins/markets`, {
           params: {
-            vs_currency: "usd",
+            vs_currency: vs_currency || "usd",
             order: "market_cap_desc",
             per_page: per_page || 8,
             page: page || 1,
@@ -15,6 +15,7 @@ export const fetchCryptos = async (per_page, page) => {
         return response.data;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
@@ -23,11 +24,12 @@ export const fetchCryptoChart = async (id) => {
         const response = await axios.get(`${API_URL}/coins/${id}/market_chart`, {
           params: {
             vs_currency: "usd",
-            days: "30-12-2017",
+            days: 30,
           },
         });
         return response.data.prices;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };

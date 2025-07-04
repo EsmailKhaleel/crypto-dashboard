@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-function CustomDropdown({ groupedCurrencies, selectedPair, onSelectPair }) {
+function CustomDropdown({ options, selected, onSelect, label }) {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
     const toggleDropdown = () => setOpen(!open);
-    const handleSelect = (pairId) => {
-        onSelectPair(pairId);
+    const handleSelect = (value) => {
+        onSelect(value);
         setOpen(false);
     };
 
@@ -22,24 +22,20 @@ function CustomDropdown({ groupedCurrencies, selectedPair, onSelectPair }) {
 
     return (
         <div className="custom-dropdown" ref={dropdownRef}>
+            {label && <div className="custom-dropdown-label">{label}</div>}
             <div className="custom-dropdown-toggle" onClick={toggleDropdown}>
-                {selectedPair || 'Select a currency pair'}
+                {options.find(opt => opt.value === selected)?.label || 'Select...'}
                 <span className="arrow">{open ? '▲' : '▼'}</span>
             </div>
             {open && (
                 <div className="custom-dropdown-menu">
-                    {Object.entries(groupedCurrencies).map(([quote, pairs]) => (
-                        <div key={quote} className="dropdown-group">
-                            <div className="group-label">{quote}</div>
-                            {pairs.map((currency) => (
-                                <div
-                                    key={currency.id}
-                                    className={`dropdown-item ${currency.id === selectedPair ? 'selected' : ''}`}
-                                    onClick={() => handleSelect(currency.id)}
-                                >
-                                    {currency.display_name}
-                                </div>
-                            ))}
+                    {options.map((option) => (
+                        <div
+                            key={option.value}
+                            className={`dropdown-item ${option.value === selected ? 'selected' : ''}`}
+                            onClick={() => handleSelect(option.value)}
+                        >
+                            {option.label}
                         </div>
                     ))}
                 </div>

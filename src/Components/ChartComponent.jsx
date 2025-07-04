@@ -1,89 +1,39 @@
 import React from 'react';
-import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, CategoryScale,Filler  } from "chart.js";
-
-// Register the necessary Chart.js components
-ChartJS.register(LineElement, PointElement, LinearScale, Title, Tooltip, CategoryScale,Filler );
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer
+} from 'recharts';
 
 function ChartComponent({ pair, historicalData }) {
-    // Prepare data for Chart.js
-    const chartData = {
-        labels: historicalData.map((d) => d.time),
-        datasets: [
-            {
-                label: `${pair} Price (USD)`,
-                data: historicalData.map((d) => d.price),
-                borderColor: "rgb(236, 159, 183)",
-                borderWidth: 2,
-                tension: 0.4, // Makes the line smooth
-                fill: true,
-                backgroundColor: (context) => {
-                    const ctx = context.chart.ctx;
-                    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradient.addColorStop(0, "rgba(236, 159, 183, 0.4)");
-                    gradient.addColorStop(1, "rgba(236, 159, 183, 0)");
-                    return gradient;
-                },
-            },
-        ],
-    };
-
-    // Chart.js options for styling
-    const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: true,
-                position: "top",
-                labels: {
-                    color: "#fff", // White text for legend
-                },
-            },
-            tooltip: {
-                backgroundColor: "rgba(0, 0, 0, 0.7)", // Dark background for tooltips
-                titleColor: "#fff",
-                bodyColor: "#fff",
-            },
-        },
-        scales: {
-            x: {
-                title: {
-                    display: true,
-                    text: "Date",
-                    color: "#fff", // White text for x-axis
-                },
-                grid: {
-                    color: "#444", // Dark grid lines
-                },
-            },
-            y: {
-                title: {
-                    display: true,
-                    text: "Price (USD)",
-                    color: "#fff", // White text for y-axis
-                },
-                grid: {
-                    color: "#444", // Dark grid lines
-                },
-            },
-        },
-    };
-
-    return (
-        
-        <div>
-            {historicalData.length > 0 ? (
-                <div className='chart-wrapper'>
-                    <Line data={chartData} options={chartOptions} />
-                </div>
-            ) : (
-                <p style={{ color: "#fff" }}>Loading chart...</p>
-            )}
-        </div>
-
-        
-    );
+  // historicalData: [{ time, price }]
+  return (
+    <div className='chart-wrapper'>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={historicalData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--text-secondary)" />
+          <XAxis
+            dataKey="time"
+            stroke="var(--text-secondary)"
+            tick={{ fontSize: 12, fill: 'var(--text-secondary)' }}
+            label={{ position: 'insideBottom', offset: -5, fill: 'var(--text-primary)', fontSize: 13 }}
+          />
+          <YAxis
+            stroke="var(--text-secondary)"
+            tick={{ fontSize: 12, fill: 'var(--text-secondary)' }}
+            tickFormatter={v => `$${v}`}
+            label={{ value: 'Price (USD)', angle: -90, position: 'insideLeft', fill: 'var(--text-primary)', fontSize: 13 }}
+          />
+          <Tooltip wrapperStyle={{ className: 'coinbase-tooltip' }} formatter={v => `$${v}`} />
+          <Line type="monotone" dataKey="price" stroke="#ec9fb7" strokeWidth={2} dot={false} name={`${pair} Price (USD)`} fillOpacity={0.2} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }
 
 export default ChartComponent;

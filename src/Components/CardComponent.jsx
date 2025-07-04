@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CardComponent({currency, scrollToTop, setPair}) {
+function CardComponent({currency, setPair}) {
     return (
         <div
             className="currency-card"
@@ -8,7 +8,7 @@ function CardComponent({currency, scrollToTop, setPair}) {
         >
             <h3>{currency.display_name}</h3>
             <h5 className={currency.status == 'online' ? 'online' : ''}>{currency.status}</h5>
-            <button className="details-button" onClick={scrollToTop}>Show Details</button>
+            <button className="details-button">Show Details</button>
         </div>
     )
 }
