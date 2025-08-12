@@ -15,7 +15,7 @@ function Dashboard() {
     const url = 'https://api.exchange.coinbase.com';
 
     useEffect(() => {
-        setError(null); // Reset error on dependency change
+        setError(null);
         ws.current = new WebSocket("wss://ws-feed.exchange.coinbase.com");
         ws.current.onopen = async () => {
             try {
@@ -47,12 +47,17 @@ function Dashboard() {
             const data = JSON.parse(e.data);
             if (data.type === "ticker" && data.product_id === latestPair.current && data.price) {
                 setPrice(Number(data.price).toFixed(4));
+                console.log(data);
             }
         };
         return () => {
             ws.current.close();
         };
     }, []);
+    
+    useEffect(() => {
+        latestPair.current = pair;
+    }, [pair]);
 
     useEffect(() => {
         if (!pair || !ws.current || ws.current.readyState !== WebSocket.OPEN) return;
@@ -96,7 +101,6 @@ function Dashboard() {
 
         fetchHisData();
 
-        // Clean-Up
         return () => {
             if (ws.current && ws.current.readyState === WebSocket.OPEN) {
                 ws.current.send(JSON.stringify({
@@ -132,20 +136,20 @@ function Dashboard() {
         <div className="dashboard">
             {/* Quote Currency Dropdown */}
             <div className="dropdown-container">
-            <CustomDropdown
-                options={quoteOptions}
-                selected={selectedQuote}
-                onSelect={setSelectedQuote}
-                label="Select Quote Currency"
-            />
-            {/* Pair Dropdown */}
-            <CustomDropdown
-                options={pairOptions}
-                selected={pair}
-                onSelect={setPair}
-                label="Select Pair"
+                <CustomDropdown
+                    options={quoteOptions}
+                    selected={selectedQuote}
+                    onSelect={setSelectedQuote}
+                    label="Select Quote Currency"
                 />
-                </div>
+                {/* Pair Dropdown */}
+                <CustomDropdown
+                    options={pairOptions}
+                    selected={pair}
+                    onSelect={setPair}
+                    label="Select Pair"
+                />
+            </div>
             {/* Selected Pair Details */}
             {pair && (
                 <div >
